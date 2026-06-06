@@ -29,16 +29,16 @@
                 <StackPanel Grid.Column="0">
                     <Label Content="Getal1" FontWeight="Bold" Margin="10,0,10,0"/>
                     <Label Content="Van:"  Margin="10,0,10,0"/>
-                    <TextBox x:Name="firstNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0"/>
+                    <TextBox x:Name="firstNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0" TextChanged="Range_TextChanged" KeyDown="Range_KeyDown"/>
                     <Label Content="Tot:"  Margin="10,0,10,0"/>
-                    <TextBox x:Name="firstNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100"/>                    
+                    <TextBox x:Name="firstNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100" TextChanged="Range_TextChanged" KeyDown="Range_KeyDown"/>                    
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <Label Content="Getal1" FontWeight="Bold" Margin="10,0,10,0"/>
                     <Label Content="Van:"  Margin="10,0,10,0"/>
-                    <TextBox x:Name="secondNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0"/>
+                    <TextBox x:Name="secondNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0" TextChanged="Range_TextChanged" KeyDown="Range_KeyDown"/>
                     <Label Content="Tot:"  Margin="10,0,10,0"/>
-                    <TextBox x:Name="secondNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100"/>                    
+                    <TextBox x:Name="secondNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100" TextChanged="Range_TextChanged" KeyDown="Range_KeyDown"/>                    
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -70,8 +70,8 @@
         <Label Grid.Column="0" Grid.Row="1" x:Name="firstNumberLabel" Content="_" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <Label Grid.Column="1" Grid.Row="1" x:Name="operatorLabel" Content="+" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Column="2" Grid.Row="1" x:Name="secondNumberLabel" Content="_" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <Label Grid.Column="3" Grid.Row="1" x:Name="equalsLabel" Content="=" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="4" Grid.Row="1" x:Name="resultTextBox" Text="??"  FontSize="72" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+        <Label Grid.Column="3" Grid.Row="1" x:Name="equalsLabel" Content="=" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDoubleClick="OnEqualsMouseDoubleClick"/>
+        <TextBox Grid.Column="4" Grid.Row="1" x:Name="resultTextBox" Text="??"  FontSize="72" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="5" KeyDown="ResultTextBox_KeyDown"/>
 
         <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="infoLabel" Margin="10" Foreground="White" FontSize="18">
             <Run Text="Instructies"
