@@ -1,0 +1,92 @@
+﻿<Window x:Class="Rekensommen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rekensommen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="LightGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Header="Opties" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label Content="Getal1" FontWeight="Bold" Margin="10,0,10,0"/>
+                    <Label Content="Van:"  Margin="10,0,10,0"/>
+                    <TextBox x:Name="firstNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0"/>
+                    <Label Content="Tot:"  Margin="10,0,10,0"/>
+                    <TextBox x:Name="firstNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100"/>                    
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="Getal1" FontWeight="Bold" Margin="10,0,10,0"/>
+                    <Label Content="Van:"  Margin="10,0,10,0"/>
+                    <TextBox x:Name="secondNumberMinTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="0"/>
+                    <Label Content="Tot:"  Margin="10,0,10,0"/>
+                    <TextBox x:Name="secondNumberMaxTextBox" Margin="10,0,10,10" HorizontalContentAlignment="Right" Text="100"/>                    
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="2" Grid.Row="0"  Header="Bewerkingen" Margin="10">
+            <StackPanel Orientation="Vertical">
+                <CheckBox x:Name="addOperatorCheckBox" Margin="10" Content="Optellen" IsChecked="True"/>
+                <CheckBox x:Name="subtractOperatorCheckBox" Margin="10" Content="Aftrekken" IsChecked="True"/>
+            </StackPanel>            
+        </GroupBox>
+
+        <GroupBox Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2"  Header="Uitkomst" Margin="10">
+            <StackPanel>
+                <Label Content="Negatieve getallen toelaten?" Margin="10,10,10,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="Ja" Margin="10,0,10,10" IsChecked="True"/>
+                    <RadioButton x:Name="disallowNegativeRadioButton"  Content="Nee" Margin="10,0,10,10"/>
+                </StackPanel>
+                <Label Content="Maximum toepassen?" Margin="10"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="applyMaximumRadioButton" Content="Ja" Margin="10"/>
+                    <RadioButton Content="Nee" Margin="10" IsChecked="True"/>
+                    <Label Content="Maximum:" Margin="10,5,0,0"/>
+                    <TextBox x:Name="maximumResultTextBox" Text="100" Margin="10,0,0,0" VerticalContentAlignment="Center" Background="#FFE4E2E2"/>
+                </StackPanel>
+            </StackPanel>            
+        </GroupBox>
+
+        <Label Grid.Column="0" Grid.Row="1" x:Name="firstNumberLabel" Content="_" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Label Grid.Column="1" Grid.Row="1" x:Name="operatorLabel" Content="+" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Column="2" Grid.Row="1" x:Name="secondNumberLabel" Content="_" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Label Grid.Column="3" Grid.Row="1" x:Name="equalsLabel" Content="=" FontWeight="Bold" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="4" Grid.Row="1" x:Name="resultTextBox" Text="??"  FontSize="72" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="infoLabel" Margin="10" Foreground="White" FontSize="18">
+            <Run Text="Instructies"
+            FontWeight="Bold"
+            TextDecorations="Underline"/>
+            <LineBreak/>
+    <Run Text="- Dubbelklik ="/>
+    <LineBreak/>
+    <Run Text="- Vul het antwoord in en druk op Enter"/>
+    <LineBreak/>
+    <Run Text="- Verbeter je tijd!"/>
+        </TextBlock>
+        <Button Grid.Column="2" Grid.Row="2" x:Name="showTimeButton" Margin="10" Padding="15">
+            <Image Source="/Images/clock.png"/>
+        </Button>
+        <Label Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" x:Name="timerLabel" Margin="10" Foreground="White" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="00:00:000"/>
+    </Grid>
+</Window>
