@@ -23,6 +23,8 @@ namespace Rekensommen
         int _expectedResult;
         DispatcherTimer _stopWatch = new DispatcherTimer();
         DateTime _stopWatchBegin;
+        TimeSpan _elapsedTime;
+        TimeSpan _highScore = TimeSpan.MaxValue; // heel grote startwaarde, zodat de gebruiker zeker minder heeft en er vanaf ronde 1 een nieuwe highscore komt. 
         
         public MainWindow()
         {
@@ -93,8 +95,7 @@ namespace Rekensommen
             firstNumberLabel.Content = number1.ToString();
             operatorLabel.Content = randomOperator;
             secondNumberLabel.Content = number2.ToString();
-
-            
+                       
 
             resultTextBox.Focus();
 
@@ -110,6 +111,12 @@ namespace Rekensommen
                 {
                     resultTextBox.IsEnabled = false;
                     _stopWatch.Stop(); //timer stoppen
+                   
+                    if (_elapsedTime < _highScore)
+                    {
+                        MessageBox.Show("Nieuwe recordtijd gehaald!", "RECORD", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _highScore = _elapsedTime;
+                    }
                 }
                 else
                 {
@@ -167,8 +174,8 @@ namespace Rekensommen
 
         private void _stopWatch_Tick(object? sender, EventArgs e)
         {
-            TimeSpan elapsedTime = DateTime.Now - _stopWatchBegin;
-            timerLabel.Content = ($"{elapsedTime.Minutes:00}:{elapsedTime.Seconds:00}:{elapsedTime.Milliseconds:000}");
+            _elapsedTime = DateTime.Now - _stopWatchBegin;
+            timerLabel.Content = ($"{_elapsedTime.Minutes:00}:{_elapsedTime.Seconds:00}:{_elapsedTime.Milliseconds:000}");
 
         }
 
