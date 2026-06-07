@@ -9,6 +9,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Microsoft.VisualBasic;
 
 namespace Rekensommen
 {
@@ -19,6 +21,8 @@ namespace Rekensommen
     {
         Random _rng = new Random();
         int _expectedResult;
+        DispatcherTimer _stopWatch = new DispatcherTimer();
+        DateTime _stopWatchBegin;
         
         public MainWindow()
         {
@@ -65,15 +69,19 @@ namespace Rekensommen
             int number2 = _rng.Next(0,101);
 
             //TODO: calculate result and store the value in _expectedResult
-            _expectedResult = number1 + number2;
+            string randomOperator = GetRandomOperator();
+
+            _expectedResult = (randomOperator.Equals("+")) ? (number1 + number2) : (number1 - number2); //+ of - bewerking afhankelijk van GetRandomOperator
 
             firstNumberLabel.Content = number1.ToString();
-            operatorLabel.Content = "+";
+            operatorLabel.Content = randomOperator;
             secondNumberLabel.Content = number2.ToString();
 
             //TODO: call InitStopWatch
 
             resultTextBox.Focus();
+
+            InitStopWatch();
         }
 
         private void ResultTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -83,6 +91,7 @@ namespace Rekensommen
                 if (CheckResult(resultTextBox))
                 {
                     resultTextBox.IsEnabled = false;
+                    _stopWatch.Stop(); //timer stoppen
                 }
                 else
                 {
@@ -98,21 +107,73 @@ namespace Rekensommen
             //check if the input is equal to _expectedResult
             //change the backgroundcolor to lightgreen or lightcoral
 
-            bool isNumber = int.TryParse(textBox.Text, out int result);
-            bool isCorrect = result == _expectedResult;
+            //bool isNumber = int.TryParse(textBox.Text, out int result);
+            //bool isCorrect = result == _expectedResult;
 
-            if (!isNumber || !isCorrect)
+            //if (!isNumber || !isCorrect)
+            //{
+            //    textBox.Background = Brushes.LightCoral;
+            //}
+            //else
+            //{
+            //    textBox.Background = Brushes.LightGreen;
+            //}
+
+            //return (isNumber && isCorrect);
+
+            bool isNumber = int.TryParse(textBox.Text, out int result);
+            if (!isNumber || result != _expectedResult)
             {
                 textBox.Background = Brushes.LightCoral;
-            }
-            else
+                return false;
+            }          
+                      
+              textBox.Background = Brushes.LightGreen;
+              return true;    
+        }
+
+        private void OnShowTimeButtonClicked(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime = DateTime.Now;
+
+            MessageBox.Show(dateTime.ToString("ddd dd MMMM yyyy HH:mm"), "Datum en tijd", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void InitStopWatch()
+        {
+            _stopWatch.Interval = TimeSpan.FromMilliseconds(1);
+            _stopWatch.Tick += _stopWatch_Tick;
+            _stopWatch.Start();
+            _stopWatchBegin = DateTime.Now;
+        }
+
+        private void _stopWatch_Tick(object? sender, EventArgs e)
+        {
+            TimeSpan elapsedTime = DateTime.Now - _stopWatchBegin;
+            timerLabel.Content = ($"{elapsedTime.Minutes:00}:{elapsedTime.Seconds:00}:{elapsedTime.Milliseconds:000}");
+
+        }
+
+        private string GetRandomOperator()
+        {
+            if (addOperatorCheckBox.IsChecked == true && subtractOperatorCheckBox.IsChecked == true)
             {
-                textBox.Background = Brushes.LightGreen;
+                int randomOperator = _rng.Next(0, 2);
+                if (randomOperator == 0)
+                {
+                    return "+";
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+            else if (addOperatorCheckBox.IsChecked == true)
+            {
+                return "+";
             }
 
-            return (isNumber && isCorrect);
-        
+            return "-";          
         }
-       
     }
 }

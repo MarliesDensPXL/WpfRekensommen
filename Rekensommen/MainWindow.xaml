@@ -45,8 +45,8 @@
 
         <GroupBox Grid.Column="2" Grid.Row="0"  Header="Bewerkingen" Margin="10">
             <StackPanel Orientation="Vertical">
-                <CheckBox x:Name="addOperatorCheckBox" Margin="10" Content="Optellen" IsChecked="True"/>
-                <CheckBox x:Name="subtractOperatorCheckBox" Margin="10" Content="Aftrekken" IsChecked="True"/>
+                <CheckBox x:Name="addOperatorCheckBox" Margin="5" Content="Optellen" IsChecked="True"/>
+                <CheckBox x:Name="subtractOperatorCheckBox" Margin="5" Content="Aftrekken" IsChecked="True"/>
             </StackPanel>            
         </GroupBox>
 
@@ -84,7 +84,7 @@
     <LineBreak/>
     <Run Text="- Verbeter je tijd!"/>
         </TextBlock>
-        <Button Grid.Column="2" Grid.Row="2" x:Name="showTimeButton" Margin="10" Padding="15">
+        <Button Grid.Column="2" Grid.Row="2" x:Name="showTimeButton" Margin="10" Padding="5" Click="OnShowTimeButtonClicked">
             <Image Source="/Images/clock.png"/>
         </Button>
         <Label Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" x:Name="timerLabel" Margin="10" Foreground="White" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="00:00:000"/>
