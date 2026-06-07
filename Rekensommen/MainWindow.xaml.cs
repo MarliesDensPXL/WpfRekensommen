@@ -65,22 +65,40 @@ namespace Rekensommen
             resultTextBox.IsEnabled = true;
 
             //TODO: generate random numbers
-            int number1 = _rng.Next(0, 101);
-            int number2 = _rng.Next(0,101);
+            
+
+            
+            //int number2 = _rng.Next(0,101);
 
             //TODO: calculate result and store the value in _expectedResult
             string randomOperator = GetRandomOperator();
 
-            _expectedResult = (randomOperator.Equals("+")) ? (number1 + number2) : (number1 - number2); //+ of - bewerking afhankelijk van GetRandomOperator
+            int number1 = 0;
+            int number2 = 0;
+            int max = int.Parse(maximumResultTextBox.Text);
+
+            if (randomOperator.Equals("+"))
+            {                
+                number1 = (applyMaximumRadioButton.IsChecked == true) ? _rng.Next(0, max + 1) : _rng.Next(0, 101);
+                number2 = (applyMaximumRadioButton.IsChecked == true) ? _rng.Next(0, (max - number1) + 1) : _rng.Next(0, 101);
+            }
+            else
+            {
+                number1 = (applyMaximumRadioButton.IsChecked == true) ? _rng.Next(0, max + 1) : _rng.Next(0, 101);
+                number2 = (disallowNegativeOutcomeRadioButton.IsChecked == true) ? _rng.Next(0, number1 + 1) : _rng.Next(0, 101);
+            }
+
+                _expectedResult = (randomOperator.Equals("+")) ? (number1 + number2) : (number1 - number2); //+ of - bewerking afhankelijk van GetRandomOperator
 
             firstNumberLabel.Content = number1.ToString();
             operatorLabel.Content = randomOperator;
             secondNumberLabel.Content = number2.ToString();
 
-            //TODO: call InitStopWatch
+            
 
             resultTextBox.Focus();
 
+            //TODO: call InitStopWatch
             InitStopWatch();
         }
 
@@ -174,6 +192,18 @@ namespace Rekensommen
             }
 
             return "-";          
+        }
+
+        private void ApplyMaximum_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            if (applyMaximumRadioButton.IsChecked == true)
+            {
+                maximumResultTextBox.IsEnabled = true;
+            }
+            else
+            {
+                maximumResultTextBox.IsEnabled = false;
+            }
         }
     }
 }

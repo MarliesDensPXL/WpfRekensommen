@@ -59,10 +59,10 @@
                 </StackPanel>
                 <Label Content="Maximum toepassen?" Margin="10"/>
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="applyMaximumRadioButton" Content="Ja" Margin="10"/>
-                    <RadioButton Content="Nee" Margin="10" IsChecked="True"/>
+                    <RadioButton x:Name="applyMaximumRadioButton" Content="Ja" Margin="10" Checked="ApplyMaximum_CheckChanged" Unchecked="ApplyMaximum_CheckChanged"/>
+                    <RadioButton Content="Nee" x:Name="disallowNegativeOutcomeRadioButton" Margin="10" IsChecked="True"/>
                     <Label Content="Maximum:" Margin="10,5,0,0"/>
-                    <TextBox x:Name="maximumResultTextBox" Text="100" Margin="10,0,0,0" VerticalContentAlignment="Center" Background="#FFE4E2E2"/>
+                    <TextBox x:Name="maximumResultTextBox" Text="100" Margin="10,0,0,0" IsEnabled="False" VerticalContentAlignment="Center" Background="#FFE4E2E2" KeyDown="Range_KeyDown"/>
                 </StackPanel>
             </StackPanel>            
         </GroupBox>
